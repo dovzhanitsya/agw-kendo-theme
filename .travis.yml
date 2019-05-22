@@ -1,0 +1,34 @@
+sudo: required
+
+language: node_js
+
+addons:
+  chrome: stable
+  firefox: latest
+
+cache:
+  directories:
+    - node_modules
+    - packages/default/node_modules
+    - packages/bootstrap/node_modules
+    - packages/material/node_modules
+    - packages/theme-tasks/node_modules
+
+notifications:
+  email: false
+
+node_js:
+  - '8'
+
+before_install:
+  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then printf "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" >> ~/.npmrc; fi'
+
+before_script:
+  - lerna bootstrap --concurrency=1
+
+after_success:
+  - ./build/publish.sh
+
+branches:
+  except:
+    - "/\\.*@\\d+\\.\\d+\\.\\d+$/"

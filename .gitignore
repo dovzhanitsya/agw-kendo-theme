@@ -1,0 +1,19 @@
+# Folders
+.vscode/
+.tmp/
+node_modules/*
+dist/
+modules/
+.idea/
+
+
+# Log files
+npm-debug.log
+lerna-debug.log
+debug.log
+
+# System files
+.DS_Store
+
+# Lock files
+package-lock.json
